@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Manage from '../views/Manage.vue'
 import {store} from "core-js/internals/reflect-metadata";
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/HomeView')
+    name: 'Manage',
+    component: () => import('../views/Manage'),
+    redirect: "/home",
+    children:[
+      { path: 'home',name: 'Home', component: () => import('../views/Home'), },
+      { path: 'user',name: 'User', component: () => import('../views/User'), },
+    ]
   },
   {
     path: '/about',

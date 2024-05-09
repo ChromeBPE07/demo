@@ -8,11 +8,22 @@
   >
     <el-menu-item index="0">
       <img
-          style="width: 100px"
-          src="/public/logo.jpg"
+          style="width: 200px"
+          src="/logo.jpg"
           alt="Element logo"
       />
     </el-menu-item>
+
+    <div>
+    <el-breadcrumb separator="/" style="font-size: 18px;margin-top: 25px">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>
+        <a href="/">用户管理</a>
+      </el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    </el-breadcrumb>
+    </div>
+
     <div class="flex-grow" />
     <el-menu-item index="1">Processing Center</el-menu-item>
     <el-menu-item index="2">

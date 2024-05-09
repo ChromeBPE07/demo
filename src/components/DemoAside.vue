@@ -3,40 +3,45 @@
     <el-menu
         style="min-height: calc(100vh - 60px)"
         default-active="2"
-        class="el-menu-vertical-demo">
+        class="el-menu-vertical-demo"
+        router>
 <!--        @open="handleOpen"-->
 <!--        @close="handleClose"-->
 
-      <el-sub-menu index="1">
+      <el-menu-item index="/">
+        <el-icon><icon-menu /></el-icon>
+        <span>主页</span>
+      </el-menu-item>
+      <el-sub-menu index="2">
         <template #title>
           <el-icon><Menu /></el-icon>
           <span>后台管理</span>
         </template>
         <el-menu-item-group title="人员/动物信息管理">
-          <el-menu-item index="1-1">用户信息</el-menu-item>
-          <el-menu-item index="1-2">管理员信息</el-menu-item>
-          <el-menu-item index="1-3">流浪动物信息</el-menu-item>
+          <el-menu-item index="/user">用户信息</el-menu-item>
+          <el-menu-item index="2-2">管理员信息</el-menu-item>
+          <el-menu-item index="2-3">流浪动物信息</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="领养审理">
-          <el-menu-item index="1-4">领养申请审核</el-menu-item>
+          <el-menu-item index="2-4">领养申请审核</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="知识专栏管理">
-          <el-menu-item index="1-5">专栏文章</el-menu-item>
+          <el-menu-item index="2-5">专栏文章</el-menu-item>
         </el-menu-item-group>
 <!--        <el-sub-menu index="1-6">-->
 <!--          <template #title>item four</template>-->
 <!--          <el-menu-item index="1-6-1">item one</el-menu-item>-->
 <!--        </el-sub-menu>-->
       </el-sub-menu>
-      <el-menu-item index="2">
+      <el-menu-item index="3">
         <el-icon><icon-menu /></el-icon>
         <span>Navigator Two</span>
       </el-menu-item>
-      <el-menu-item index="3" disabled>
+      <el-menu-item index="4" disabled>
         <el-icon><document /></el-icon>
         <span>Navigator Three</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="5">
         <el-icon><setting /></el-icon>
         <span>Navigator Four</span>
       </el-menu-item>
