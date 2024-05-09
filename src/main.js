@@ -11,6 +11,7 @@ import VueAxios from 'vue-axios'
 import './assets/global.css'
 import request from "@/utils/request";
 
+
 const app = createApp(App)
 
 createApp(App).use(store).use(router).use(ElementPlus,{locale: zhCn}).use(VueAxios,axios).mount('#app')

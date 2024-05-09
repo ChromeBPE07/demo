@@ -8,7 +8,7 @@
 <!--        @open="handleOpen"-->
 <!--        @close="handleClose"-->
 
-      <el-menu-item index="/">
+      <el-menu-item index="/home">
         <el-icon><icon-menu /></el-icon>
         <span>主页</span>
       </el-menu-item>
@@ -41,9 +41,9 @@
         <el-icon><document /></el-icon>
         <span>Navigator Three</span>
       </el-menu-item>
-      <el-menu-item index="5">
+      <el-menu-item index="/about">
         <el-icon><setting /></el-icon>
-        <span>Navigator Four</span>
+        <span>关于</span>
       </el-menu-item>
     </el-menu>
   </div>

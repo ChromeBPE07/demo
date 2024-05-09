@@ -2,13 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-        currentPathName:''
   },
-
   mutations: {
-        setPath(state){
-          state.currentPathName = localStorage.getItem("currentPathName")
-        }
   },
   actions: {
   },

@@ -6,16 +6,21 @@ const routes = [
   {
     path: '/',
     name: 'Manage',
-    component: () => import('../views/Manage'),
+    // component: () => import('../views/Manage'),
     redirect: "/home",
+    meta: {title :'后台管理',isCategory: true},
     children:[
-      { path: 'home',name: 'Home', component: () => import('../views/Home'), },
-      { path: 'user',name: 'User', component: () => import('../views/User'), },
+      { path: 'user',name: 'User',meta: {title :'用户管理'}, component: () => import('../views/User'), },
     ]
   },
+  { path: '/home',
+    name: 'Home',
+    meta: {title :''},
+    component: () => import('../views/Home'), },
   {
     path: '/about',
     name: 'About',
+    meta: {title :'关于'},
     component: () => import('../views/About')
   }
 ]

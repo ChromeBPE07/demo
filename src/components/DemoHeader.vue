@@ -16,12 +16,11 @@
 
     <div>
     <el-breadcrumb separator="/" style="font-size: 18px;margin-top: 25px">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>
-        <a href="/">用户管理</a>
-      </el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+<!--      <el-breadcrumb-item  v-if="$route.name !== '主页'">{{ $route.name }}</el-breadcrumb-item>-->
+      <el-breadcrumb-item  v-for="(item, index) in $route.matched" :key="index" :to="{ path: item.path  }">{{item.meta.title}}</el-breadcrumb-item>
     </el-breadcrumb>
+
     </div>
 
     <div class="flex-grow" />
@@ -51,13 +50,19 @@
 
 <script >
 
-import ArrowDown from "@element-plus/icons/lib/ArrowDown";//引入下拉栏向下的图标
+import ArrowDown from "@element-plus/icons/lib/ArrowDown";
+import {computed, onMounted, watch} from "vue";
+import { useStore } from 'vuex';
+//引入下拉栏向下的图标
 
 export default {
   name: "DemoHeader",
   components:{
     ArrowDown//注册向下图标
-  }
+  },
+    setup() {
+
+}
 }
 
 
