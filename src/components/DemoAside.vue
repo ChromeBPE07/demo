@@ -51,9 +51,7 @@
 
 <script>
 //引入侧边栏图标
-import Setting from "@element-plus/icons/lib/Setting";
-import Menu from "@element-plus/icons/lib/Menu";
-
+import {Setting, Menu} from '@element-plus/icons'
 
 export default {
   name: "DemoAside",

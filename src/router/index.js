@@ -22,6 +22,12 @@ const routes = [
     name: 'About',
     meta: {title :'关于'},
     component: () => import('../views/About')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    meta: {title :'登录'},
+    component: () => import('../views/Login')
   }
 ]
 
