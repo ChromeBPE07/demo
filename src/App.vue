@@ -1,5 +1,5 @@
 <template>
-  <Manage></Manage>
+  <router-view/>
 </template>
 
 <script>

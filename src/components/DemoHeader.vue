@@ -17,7 +17,7 @@
     <div>
     <el-breadcrumb separator="/" style="font-size: 18px;margin-top: 25px">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item  v-for="(item, index) in $route.matched" :key="index" :to="{ path: item.path  }">{{item.meta.title}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-if="$route.path !== '/home'" v-for="(item, index) in $route.matched" :key="index" :to="{ path: item.path  }">{{item.meta.title}}</el-breadcrumb-item>
     </el-breadcrumb>
 
     </div>
@@ -75,7 +75,7 @@ export default {
       }
       return{
         data,
-        logout
+        logout,
       }
 
 }

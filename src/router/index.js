@@ -6,17 +6,14 @@ const routes = [
   {
     path: '/',
     name: 'Manage',
-    // component: () => import('../views/Manage'),
-    redirect: "/home",
+    component: () => import('../views/Manage'),
     meta: {title :'后台管理',isCategory: true},
+    redirect: "/home",
     children:[
-      { path: 'user',name: 'User',meta: {title :'用户管理'}, component: () => import('../views/User'), },
+      { path: 'user',name: 'User',meta: {title :'用户管理'}, component: () => import('../views/User')},
+      { path: '/home',name: 'Home',meta: {title :''},component: () => import('../views/Home'), },
     ]
   },
-  { path: '/home',
-    name: 'Home',
-    meta: {title :''},
-    component: () => import('../views/Home'), },
   {
     path: '/about',
     name: 'About',
@@ -26,8 +23,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    meta: {title :'登录'},
     component: () => import('../views/Login')
+  },
+  {
+    path: '/register',
+        name: 'Register',
+    component: () => import('../views/Register')
   }
 ]
 
