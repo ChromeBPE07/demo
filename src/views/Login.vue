@@ -43,12 +43,12 @@ export default {
   setup(){
     const data = ref({
       user: {
-        username:"admin",
-        password:123456,
+        username:"admit",
+        password:"123456",
       }, //分页总数
     });
-    const router = useRouter();
-    const instance = getCurrentInstance();
+
+
 
     const rules ={
       username: [
@@ -61,21 +61,22 @@ export default {
       ]
     }
 
+    const router = useRouter();
+    const instance = getCurrentInstance();
     const userForm = ref(null); // 创建一个响应式引用用于存储表单实例
 
     const login = () => {
       userForm.value.validate((valid, fields) => {
         if (valid) { //表单校验合法
           request.post("/user/login", data.value.user).then(res =>{
-                if(!res){
-                  instance.proxy.$message.error("用户名或密码错误");
-                }else {
+                if(res.code === '200'){
+                  localStorage.setItem("user", JSON.stringify(res.data))  //存储用户信息到浏览器
                   router.push("/");
+                  instance.proxy.$message.success("登陆成功");
+                }else {
+                  instance.proxy.$message.error(res.msg);
                 }
-              }
-          )
-        } else {
-          return false;
+              })
         }
       })
     };
