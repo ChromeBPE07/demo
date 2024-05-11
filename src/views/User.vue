@@ -47,14 +47,15 @@
       <el-table-column type="selection" width="55" />
       <el-table-column prop="id" label="ID" sortable width="80"/>
       <el-table-column prop="username" label="用户名" sortable width="180" />
+      <el-table-column prop="nickname" label="昵称"  />
       <el-table-column prop="sex" label="性别" />
       <el-table-column prop="age" label="年龄" />
       <el-table-column prop="address" label="住址" />
       <el-table-column prop="telephone" label="电话号码" />
       <el-table-column prop="email" label="邮箱" />
-      <el-table-column prop="state" label="是否领养" />
+      <el-table-column prop="state" label="领养经验" />
       <el-table-column prop="pic" label="头像" />
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="125">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">
             编辑
@@ -94,6 +95,18 @@
         <el-form-item label="用户名" >
           <el-input v-model="data.form.username" autocomplete="off" />
         </el-form-item>
+        <el-form-item label="昵称" >
+          <el-input v-model="data.form.nickname" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="性别">
+          <el-radio-group v-model="data.form.sex">
+            <el-radio value="男">男</el-radio>
+            <el-radio value="女">女</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="年龄">
+          <el-input v-model="data.form.age" autocomplete="off" />
+        </el-form-item>
         <el-form-item label="住址" >
           <el-input v-model="data.form.address" autocomplete="off" />
         </el-form-item>
@@ -103,7 +116,11 @@
         <el-form-item label="邮箱" >
           <el-input v-model="data.form.email" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Zones" >
+        <el-form-item label="领养经验">
+          <el-radio-group v-model="data.form.state">
+            <el-radio value=1>有</el-radio>
+            <el-radio value=0>无</el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <template #footer>

@@ -36,7 +36,9 @@
           </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Action 1</el-dropdown-item>
+            <router-link to="/person">
+            <el-dropdown-item>个人信息</el-dropdown-item>
+            </router-link>
             <el-dropdown-item disabled>Action 4</el-dropdown-item>
             <span style="text-decoration: none" @click="logout">
                 <el-dropdown-item divided>退出</el-dropdown-item>

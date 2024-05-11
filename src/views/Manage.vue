@@ -7,7 +7,9 @@
       <!--      侧边栏-->
       <DemoAside/>
       <!--      内容区域-->
-      <router-view style="flex: 1"/>
+      <router-view />
+<!--      //加了style="flex: 1"导致/person里的div宽度失效-->
+<!--      //应用一个 CSS 的弹性盒子（Flexbox）布局属性到这个元素上，在弹性容器中应该占据所有可用的空间-->
     </div>
   </div>
 </template>
