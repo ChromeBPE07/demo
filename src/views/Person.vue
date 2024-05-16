@@ -1,6 +1,18 @@
 <template>
-    <el-card style="width: 500px;height: 600px; margin: 20px">
+    <el-card style="width: 500px; margin: 20px">
       <el-form label-width="100px" size="large">
+        <div style="text-align: center; margin: 10px 0">
+          <el-upload
+              class="avatar-uploader"
+              action="http://localhost:9090/file/upload"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+          >
+            <img v-if="data.form.avatarurl" :src="data.form.avatarurl" class="avatar" />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+        </div>
+
         <el-form-item label="用户名" >
           <el-input v-model="data.form.username" autocomplete="off" />
         </el-form-item>
@@ -27,8 +39,8 @@
         </el-form-item>
         <el-form-item label="领养经验">
           <el-radio-group v-model="data.form.state">
-            <el-radio value=1>有</el-radio>
-            <el-radio value=0>无</el-radio>
+            <el-radio value="true">有</el-radio>
+            <el-radio value="false">无</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item>
@@ -44,12 +56,11 @@ import {ref,defineComponent,onMounted} from "vue";
 import {ElMessage} from 'element-plus'
 
 
-export default defineComponent({
+export default {
   name: "Person",
   setup() {
     const data = ref({
       form: {
-        state:0
       },
       user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
     });
@@ -65,9 +76,9 @@ export default defineComponent({
 
         // 检查响应码，并更新表单数据
         if (res.code === '200') {
-          console.log(res.data)
+          // console.log(res.data)
           data.value.form = res.data;
-          console.log(data.value.form)
+          // console.log(data.value.form)
         }
       } catch (error) {
         // 处理错误
@@ -84,14 +95,46 @@ export default defineComponent({
       })
     };
 
+    const handleAvatarSuccess = (res) =>{
+      //res就是文件的路径
+      data.value.form.avatarurl = res
+    }
+
     return{
       data,
-      save
+      save,
+      handleAvatarSuccess
     }
   }
-})
+}
 </script>
 
 <style scoped>
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;}
+</style>
 
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
+}
 </style>

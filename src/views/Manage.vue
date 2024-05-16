@@ -23,7 +23,7 @@ import {defineComponent} from "vue";
 import DemoHeader from "@/components/DemoHeader";
 import DemoAside from "@/components/DemoAside";
 
-export default defineComponent({
+export default {
   name: 'Manage',
   components:{
     DemoHeader,
@@ -32,5 +32,5 @@ export default defineComponent({
   setup(){
 
   }
-});
+};
 </script>

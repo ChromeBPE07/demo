@@ -3,11 +3,10 @@
 </template>
 
 <script>
-import Manage from "@/views/Manage";
 export default {
   name:"Layout",
   components:{
-    Manage
+
   }
 }
 </script>

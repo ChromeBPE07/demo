@@ -20,7 +20,7 @@
         <el-menu-item-group title="人员/动物信息管理">
           <el-menu-item index="/user">用户信息</el-menu-item>
           <el-menu-item index="2-2">管理员信息</el-menu-item>
-          <el-menu-item index="2-3">流浪动物信息</el-menu-item>
+          <el-menu-item index="/pet">流浪动物信息</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="领养审理">
           <el-menu-item index="2-4">领养申请审核</el-menu-item>

@@ -37,22 +37,20 @@
               border
               stripe
               sortable
-              style="width: 100%;"
+              style="width: 100%"
               max-height="550px"
               @selection-change="handleSelectionChange"
               size="small"
     >
       <el-table-column type="selection" width="55" />
       <el-table-column prop="id" label="ID" sortable width="80"/>
-      <el-table-column prop="username" label="用户名" sortable width="120" />
-      <el-table-column prop="nickname" label="昵称"  />
+      <el-table-column prop="petname" label="宠物名" sortable width="180" />
       <el-table-column prop="sex" label="性别" />
       <el-table-column prop="age" label="年龄" />
-      <el-table-column prop="address" label="住址" width="150"/>
-      <el-table-column prop="telephone" label="电话号码" width="120"/>
-      <el-table-column prop="email" label="邮箱" width="150"/>
-      <el-table-column prop="state" label="领养经验" />
-      <el-table-column prop="avatarurl" label="头像" width="180"/>
+      <el-table-column prop="pettype" label="品种" />
+      <el-table-column prop="remark" label="简介" width="280"/>
+      <el-table-column prop="state" label="领养状态" />
+      <el-table-column prop="pic" label="图片" width="180"/>
       <el-table-column label="操作" width="125">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">
@@ -76,7 +74,7 @@
     </el-table>
 
     <!--    分页区域-->
-    <div style="margin: 10px 0">
+    <div style="margin: 10px 0; ">
       <el-pagination
           :current-page="data.pageNum"
           :total="data.total"
@@ -89,36 +87,31 @@
       />
     </div>
 
-    <el-dialog v-model="data.dialogFormVisible" title="用户信息" width="30%">
+    <el-dialog v-model="data.dialogFormVisible" title="宠物信息" width="30%">
       <el-form label-width="100px" size="large">
-        <el-form-item label="用户名" >
-          <el-input v-model="data.form.username" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="昵称" >
-          <el-input v-model="data.form.nickname" autocomplete="off" />
+        <el-form-item label="宠物名" >
+          <el-input v-model="data.form.petname" autocomplete="off" />
         </el-form-item>
         <el-form-item label="性别">
           <el-radio-group v-model="data.form.sex">
-            <el-radio value="男">男</el-radio>
-            <el-radio value="女">女</el-radio>
+            <el-radio value="雄性">雄性</el-radio>
+            <el-radio value="雌性">雌性</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="年龄">
           <el-input v-model="data.form.age" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="住址" >
-          <el-input v-model="data.form.address" autocomplete="off" />
+        <el-form-item label="品种" >
+          <el-input v-model="data.form.pettype" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="电话" >
-          <el-input v-model="data.form.telephone" autocomplete="off" />
+        <el-form-item label="简介" >
+          <el-input v-model="data.form.remark" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="邮箱" >
-          <el-input v-model="data.form.email" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="领养经验">
+        <el-form-item label="领养状态">
           <el-radio-group v-model="data.form.state">
-            <el-radio value="true">有</el-radio>
-            <el-radio value="false">无</el-radio>
+            <el-radio value="0">未被领养</el-radio>
+            <el-radio value="1">被申请领养</el-radio>
+            <el-radio value="2">已被领养</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -140,7 +133,7 @@ import {ElMessage } from 'element-plus'
 import request from "@/utils/request";
 
 export default defineComponent({
-  name: 'User.vue',
+  name: 'Pet.vue',
   components: {
     Search,
     Refresh
@@ -158,11 +151,11 @@ export default defineComponent({
     })
 
     const load = () =>{
-      request.get(`/user/page`,{
+      request.get(`/pet/page`,{
         params:{
           pageNum: data.value.pageNum,
           pageSize: data.value.pageSize,
-          username: data.value.searchKW
+          petname: data.value.searchKW
         }
       }).then(res => {
         console.log(res)
@@ -170,10 +163,6 @@ export default defineComponent({
         data.value.total = res.total
       })
 
-      //   fetch(`/user/page?pageNum=${pageNum.value}&pageSize=${pageSize.value}&username=${searchKW.value}`).then(res => res.json()).then(res =>{
-      //   tableData.value = res.data
-      //   total.value = res.total
-      // })
     }
 
     //页面刚开始时调用渲染数据
@@ -204,7 +193,7 @@ export default defineComponent({
     };
 
     const save = () =>{
-      request.post(`/user`, data.value.form).then(res => {
+      request.post(`/pet`, data.value.form).then(res => {
         if(res){
           ElMessage.success("保存成功")
           data.value.dialogFormVisible = false
@@ -224,7 +213,7 @@ export default defineComponent({
     };
 
     const handleDelete = (id) =>{
-      request.delete(`/user/${id}`).then(res =>{
+      request.delete(`/pet/${id}`).then(res =>{
         if(res){
           ElMessage.success("删除成功")
           load()
@@ -241,7 +230,7 @@ export default defineComponent({
 
     const delBath = () => {
       let ids = data.value.multipleSelection.map(v => v.id)
-      request.post(`/user/del/batch`, ids).then(res =>{
+      request.post(`/pet/del/batch`, ids).then(res =>{
         if(res){
           ElMessage.success("批量删除成功")
           load()

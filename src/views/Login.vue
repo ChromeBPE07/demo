@@ -50,8 +50,6 @@ export default {
       }, //分页总数
     });
 
-
-
     const rules ={
       username: [
         { required: true, message: '请输入用户名', trigger: 'blur' },

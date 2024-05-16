@@ -11,6 +11,7 @@ const routes = [
     redirect: "/home",
     children:[
       { path: 'user',name: 'User',meta: {title :'用户管理'}, component: () => import('../views/User')},
+      { path: 'pet',name: 'Pet',meta: {title :'流浪动物管理'}, component: () => import('../views/Pet')},
       { path: 'home',name: 'Home',meta: {title :''},component: () => import('../views/Home'), },
       { path: 'person',name: 'Person',meta: {title :'个人信息'}, component: () => import('../views/Person')},
     ]
