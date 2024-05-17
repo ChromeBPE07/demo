@@ -3,20 +3,68 @@
 
     <!--    搜索区域-->
     <div style="margin: 0 0 10px 0">
+<!--      //根据名字搜索-->
       <el-input
-          v-model="data.searchKW"
-          style="max-width: 30%"
-          placeholder="请输入关键字"
+          v-model="data.petname"
+          clearable
+          style="max-width: 20%; margin-right: 10px "
+          placeholder="请输入名称"
       >
-        <template #append>
-          <el-button type="primary" @click="load">
-            搜索<el-icon class="el-input__icon"><search /></el-icon>
-          </el-button>
+        <template #suffix>
+          <el-icon class="el-input__icon"><search /></el-icon>
         </template>
       </el-input>
-      <el-button type="info" @click="reset">
+
+      <!--      根据性别搜索-->
+      <el-select
+          v-model="data.sex"
+          clearable
+          placeholder="性别"
+          style="max-width: 7%; margin-right: 10px "
+      >
+        <el-option
+            v-for="item in sexchs"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+        />
+      </el-select>
+
+<!--      根据品种搜索-->
+      <el-input
+          v-model="data.pettype"
+          clearable
+          style="max-width: 20%; margin-right: 10px"
+          placeholder="请输入品种"
+      >
+        <template #suffix>
+          <el-icon class="el-input__icon"><search /></el-icon>
+        </template>
+      </el-input>
+
+      <!--      根据领养状态-->
+      <el-select
+          v-model="data.state"
+          clearable
+          placeholder="领养状态"
+          style="width: 10%; margin-right: 10px"
+      >
+        <el-option
+            v-for="item in statechs"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+        />
+      </el-select>
+
+      <el-button type="primary" @click="load">
+        搜索<el-icon class="el-input__icon"><search /></el-icon>
+      </el-button>
+
+      <el-button type="warning" @click="reset">
         重置<el-icon><Refresh /></el-icon>
       </el-button>
+
     </div>
 
     <!--    功能区域-->
@@ -87,6 +135,7 @@
       />
     </div>
 
+<!--    对话框，用以编辑内容-->
     <el-dialog v-model="data.dialogFormVisible" title="宠物信息" width="30%">
       <el-form label-width="100px" size="large">
         <el-form-item label="宠物名" >
@@ -144,18 +193,53 @@ export default defineComponent({
       tableData:[],
       pageNum:1,
       pageSize:5,
-      searchKW:"", //搜索关键字,默认为空
+      petname:"", //搜索名字,默认为空
+      pettype:"", //搜索品类,默认为空
+      sex:"",//搜索性别，默认为空
+      state:"",//领养状态，默认为空
       dialogFormVisible:false,
       form:{},
       multipleSelection:[],  //复选框选中时获得的数据
     })
+
+    //性别选择下拉栏数据
+    const sexchs = [
+      {
+        value: '雌性',
+        label: '雌性',
+      },
+      {
+        value: '雄性',
+        label: '雄性',
+      }
+    ]
+
+    //领养状态选择下拉栏数据
+    const statechs = [
+      {
+        value: '0',
+        label: '无领养申请',
+      },
+      {
+        value: '1',
+        label: '被申请领养',
+      },
+      {
+        value: '2',
+        label: '已被领养',
+      }
+
+    ]
 
     const load = () =>{
       request.get(`/pet/page`,{
         params:{
           pageNum: data.value.pageNum,
           pageSize: data.value.pageSize,
-          petname: data.value.searchKW
+          petname: data.value.petname,
+          pettype: data.value.pettype,
+          sex: data.value.sex,
+          state: data.value.state,
         }
       }).then(res => {
         console.log(res)
@@ -168,8 +252,11 @@ export default defineComponent({
     //页面刚开始时调用渲染数据
     load()
 
+    //重置搜索数据为空
     const reset = () => {
-      data.value.searchKW = ""
+      data.value.petname = ""
+      data.value.pettype = ""
+      data.value.state = ""
       load()
     }
 
@@ -247,6 +334,8 @@ export default defineComponent({
       handleAdd,
       handleEdit,
       handleDelete,
+      sexchs,
+      statechs,
       delBath,
       save,
       load,

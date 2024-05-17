@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper">
-    <div style="margin: 200px auto; background-color: rgba(255,255,255,0.9); width: 350px; height: 300px; padding : 20px; border-radius: 10px; box-shadow: 7px 12px 5px rgba(0, 0, 0, 0.4);">
+    <div style="margin: 200px auto; background-color: rgba(255,255,255,0.9); width: 350px; height: 325px; padding : 20px; border-radius: 10px; box-shadow: 7px 12px 5px rgba(0, 0, 0, 0.4);">
     <div style="margin: 20px 0; text-align: center; font-size: 24px"><b>登录</b></div>
 
       <el-form :model="data.user" :rules="rules" ref="userForm">
+
         <el-form-item prop="username" >
           <el-input size="large" style="margin: 10px 0" v-model="data.user.username">
             <template #prefix><el-icon class="el-input__icon"><user /></el-icon></template>
@@ -15,7 +16,15 @@
             <template #prefix><el-icon class="el-input__icon"><lock /></el-icon></template>
           </el-input>
         </el-form-item>
-      <el-form-item style="margin: 10px 0; text-align: right">
+
+        <el-form-item  prop="role" >
+          <el-radio-group style="margin-top: -25px;margin-left: auto;margin-right: 10px" v-model="data.user.role" >
+            <el-radio value="user" size="large">用户</el-radio>
+            <el-radio value="admit" size="large">管理员</el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+      <el-form-item style="margin: -10px 0; text-align: right">
         <div style="width: 100%;padding: 0 10px;display: flex;justify-content: space-between; /* 按钮之间平均分配空间 */align-items: center; /* 垂直居中，如果按钮的高度与div的高度不同 */">
           <el-button type="success" autocomplete="off" @click="$router.push('/register')" plain>注册</el-button>
           <el-button type="primary"  autocomplete="off" @click="login" plain>登录</el-button>
@@ -47,6 +56,7 @@ export default {
       user: {
         username:"admit",
         password:"123456",
+        role:"admit",
       }, //分页总数
     });
 

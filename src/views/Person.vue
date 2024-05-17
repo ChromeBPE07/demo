@@ -54,10 +54,14 @@
 import request from "@/utils/request";
 import {ref,defineComponent,onMounted} from "vue";
 import {ElMessage} from 'element-plus'
+import {Plus} from '@element-plus/icons'
 
 
 export default {
   name: "Person",
+  components:{
+    Plus
+  },
   setup() {
     const data = ref({
       form: {

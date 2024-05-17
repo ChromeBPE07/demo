@@ -5,16 +5,19 @@
     <div style="margin: 0 0 10px 0">
       <el-input
           v-model="data.searchKW"
-          style="max-width: 30%"
-          placeholder="请输入关键字"
+          clearable
+          style="max-width: 30%; margin-right: 15px"
+          placeholder="请输入用户名"
       >
-        <template #append>
-          <el-button type="primary" @click="load">
-            搜索<el-icon class="el-input__icon"><search /></el-icon>
-          </el-button>
-        </template>
+          <template #suffix>
+            <el-icon class="el-input__icon"><search /></el-icon>
+          </template>
       </el-input>
-      <el-button type="info" @click="reset">
+      <el-button type="primary" @click="load">
+        搜索<el-icon class="el-input__icon"><search /></el-icon>
+      </el-button>
+
+      <el-button type="warning" @click="reset">
         重置<el-icon><Refresh /></el-icon>
       </el-button>
     </div>
@@ -52,7 +55,9 @@
       <el-table-column prop="telephone" label="电话号码" width="120"/>
       <el-table-column prop="email" label="邮箱" width="150"/>
       <el-table-column prop="state" label="领养经验" />
-      <el-table-column prop="avatarurl" label="头像" width="180"/>
+      <el-table-column label="头像" width="120"> <template #default="scope">
+        <el-image style="width: 100px; height: 100px; padding: 5px;" :src="scope.row.avatarurl" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2" :preview-src-list="[scope.row.avatarurl]" :initial-index="4" fit="cover" />
+      </template> </el-table-column>
       <el-table-column label="操作" width="125">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">
@@ -89,6 +94,7 @@
       />
     </div>
 
+    //对话框，用于弹出编辑内容
     <el-dialog v-model="data.dialogFormVisible" title="用户信息" width="30%">
       <el-form label-width="100px" size="large">
         <el-form-item label="用户名" >
@@ -121,6 +127,26 @@
             <el-radio value="false">无</el-radio>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="用户头像">
+          <el-input
+              v-model="data.form.avatarurl"
+              style="max-width: 600px"
+              placeholder="请输入图片url"
+          >
+            <template #append>
+              <el-upload
+                  class="upload-demo"
+                  action="http://localhost:9090/file/upload"
+              :on-success="handleAvatarSuccess"
+              :show-file-list="false"
+              >
+              <el-button type="primary">
+                <el-icon><Upload /></el-icon>
+              </el-button>
+              </el-upload>
+            </template>
+          </el-input>
+        </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
@@ -135,7 +161,7 @@
 
 <script>
 import {defineComponent,ref,getCurrentInstance} from "vue";
-import {Refresh, Search} from '@element-plus/icons'
+import {Refresh, Search, Upload} from '@element-plus/icons'
 import {ElMessage } from 'element-plus'
 import request from "@/utils/request";
 
@@ -143,7 +169,8 @@ export default defineComponent({
   name: 'User.vue',
   components: {
     Search,
-    Refresh
+    Refresh,
+    Upload
   },
   setup(){
     const data = ref({
@@ -198,6 +225,7 @@ export default defineComponent({
       load()
     }
 
+    //新增
     const handleAdd = () =>{
       data.value.dialogFormVisible = true;
       data.value.form = {}
@@ -222,6 +250,11 @@ export default defineComponent({
       // data.value.form = row   出错，修改表单数据后未点击确认表格数据便更改，系因将该行的数据row赋给表格时是引用赋值，即它们指向同一对象
       data.value.dialogFormVisible = true
     };
+
+    const handleAvatarSuccess = (res) =>{
+      //res就是文件的路径
+      data.value.form.avatarurl = res
+    }
 
     const handleDelete = (id) =>{
       request.delete(`/user/${id}`).then(res =>{
@@ -259,6 +292,7 @@ export default defineComponent({
       handleEdit,
       handleDelete,
       delBath,
+      handleAvatarSuccess,
       save,
       load,
       reset,

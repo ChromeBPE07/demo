@@ -5,6 +5,7 @@
       mode="horizontal"
       :ellipsis="false"
       @select="handleSelect"
+      router
   >
 <!--    左侧logo-->
     <el-menu-item index="0">
@@ -25,10 +26,10 @@
 
     <div class="flex-grow" />
 
-    <el-menu-item index="1">首页</el-menu-item>
+    <el-menu-item index="/home">首页</el-menu-item>
     <el-menu-item index="2">领养中心</el-menu-item>
     <el-menu-item index="3">知识专栏</el-menu-item>
-    <el-menu-item index="4">关于我们</el-menu-item>
+    <el-menu-item index="/about">关于我们</el-menu-item>
 
     <el-menu-item index="5">
       <el-dropdown>

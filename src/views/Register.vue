@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div style="margin: 100px auto; background-color: rgba(255,255,255,0.9); width: 350px; height: 350px; padding : 20px; border-radius: 10px; box-shadow: 7px 12px 5px rgba(0, 0, 0, 0.4);">
+    <div style="margin: 200px auto; background-color: rgba(255,255,255,0.9); width: 350px; height: 350px; padding : 20px; border-radius: 10px; box-shadow: 7px 12px 5px rgba(0, 0, 0, 0.4);">
     <div style="margin: 20px 0; text-align: center; font-size: 24px"><b>注册</b></div>
 
       <el-form :model="data.user" :rules="rules" ref="userForm">
