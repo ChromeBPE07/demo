@@ -25,7 +25,7 @@
           <el-menu-item index="2-4">领养申请审核</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="知识专栏管理">
-          <el-menu-item index="2-5">专栏文章</el-menu-item>
+          <el-menu-item index="/columns">专栏文章</el-menu-item>
         </el-menu-item-group>
 <!--        <el-sub-menu index="1-6">-->
 <!--          <template #title>item four</template>-->

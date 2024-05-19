@@ -27,7 +27,7 @@
     <div class="flex-grow" />
 
     <el-menu-item index="/home">首页</el-menu-item>
-    <el-menu-item index="2">领养中心</el-menu-item>
+    <el-menu-item index="/pets">领养中心</el-menu-item>
     <el-menu-item index="3">知识专栏</el-menu-item>
     <el-menu-item index="/about">关于我们</el-menu-item>
 
